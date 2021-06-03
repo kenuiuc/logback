@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="300 seconds" debug="false">
+    <appender name="LogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <File>${LOG_FILE}-log.log</File>
+        <Append>true</Append>
+        <encoder>
+            <pattern>%d %-5level [%thread]  %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+          <FileNamePattern>${LOG_FILE}-log.log.%d{yyyy-MM-dd-HH}.gz</FileNamePattern>
+            <maxHistory>48</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <appender name="ErrorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>${LOG_FILE}-error.log</File>
+        <encoder>
+            <pattern>%d %p %c - %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+          <fileNamePattern>${LOG_FILE}-error.log.%d{yyyy-MM-dd-HH}.gz</fileNamePattern>
+            <maxHistory>48</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <root level="WARN">
+        <appender-ref ref="LogFile"/>
+        <appender-ref ref="ErrorFile"/>
+    </root>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.eclipse.jetty" level="INFO"/>
+    <logger name="jndi" level="INFO"/>
+    <logger name="system.metrics" level="INFO"/>
+    <logger name="org.apache.http" level="INFO"/>
+    <logger name="com.easemob" level="INFO"/>
+    <logger name="org.springframework.data.redis.listener" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="com.easemob.push.service.impl.OfflineMessageServiceImpl" level="DEBUG"/>
+    <logger name="com.easemob.push.service.OfflineMessageServiceImpl" level="DEBUG"/>
+    <logger name="com.easemob.push.service.impl.PushMsgDispatchServiceImpl" level="DEBUG"/>
+    <logger name="com.easemob.push.service.impl.PushConditionServiceImpl" level="DEBUG"/>
+    <logger name="com.easemob.push.service.impl.PushMsgServiceImpl" level="WARN"/>
+    <logger name="com.easemob.push.processor.push.OfflineMessageKafkaProcessor" level="DEBUG"/>
+    <logger name="com.easemob.push.processor.push.OfflineMessageSlowKafkaProcessor" level="DEBUG"/>
+    <logger name="com.easemob.push.strategy.KafkaTopicForwarder" level="WARN"/>
+    <logger name="com.easemob.push.strategy.UserQueryCacheStrategy" level="WARN"/>
+    <logger name="com.easemob.push.processor.push.APNsPushKafkaProcessor" level="DEBUG"/>
+    <logger name="com.easemob.push.strategy.UserQueryDBStrategy" level="WARN"/>
+    <logger name="com.easemob.push.processor.push.GCMPushKafkaProcessor" level="DEBUG"/>
+    <logger name="com.easemob.push.sender.impl.GCMPushSender" level="WARN"/>
+    <logger name="com.easemob.push.sender.AbstractCachedPushSender" level="WARN"/>
+    <logger name="com.easemob.push.sender.impl.GcmSender" level="DEBUG"/>
+    <logger name="com.easemob.push.sender.HuaweiPushSender" level="DEBUG"/>
+    <logger name="com.easemob.push.sender.OppoPushSender" level="DEBUG"/>
+    <logger name="com.easemob.push.sender.XiaomiPushSender" level="DEBUG"/>
+    <logger name="com.easemob.push.sender.VivoPushSender" level="DEBUG"/>
+    <logger name="com.easemob.push.sender.GCMPushSender" level="DEBUG"/>
+    <logger name="org.apache.usergrid.rest.filters.FlowLimitFilter" level="ERROR"/>
+    <logger name="im.baas.persistence.EntityManagerCachedImpl" level="WARN"/>
+    <logger name="im.baas.services.messages.MessagePublisher" level="INFO"/>
+    <logger name="org.apache.usergrid.persistence.cassandra.EntityManagerImpl" level="WARN"/>
+    <logger name="com.easemob.im.migration.event.AbstractEventHandler" level="DEBUG"/>
+    <logger name="com.easemob.push.sender.OfflinePushSender" level="DEBUG"/>
+    <logger name="com.easemob.push.service.JAsyncUserPushRepository" level="DEBUG"/>
+    <logger name="org.hibernate.engine.jdbc.spi.SqlExceptionHelper" level="OFF"/>
+    <logger name="org.hibernate.internal.ExceptionMapperStandardImpl" level="OFF"/>
+    <logger name="com.easemob.service.image.ImageVerifyCodeServiceImpl" level="DEBUG"/>
+    <logger name="com.easemob.callback.services.EjabberdMessageHandler" level="WARN"/>
+    <logger name="com.easemob.im.data.service.scheduler.AbstractScheduleService" level="DEBUG"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <jmxConfigurator/>
+</configuration>
